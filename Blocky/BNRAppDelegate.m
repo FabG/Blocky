@@ -19,11 +19,27 @@
     // Block is allocated and immediately passed to the BNRExecutor, which sets its equation
     // instance variable to point at it
     BNRExecutor *executor = [[BNRExecutor alloc]init];
+    int multiplier = 3;
+    
     [executor setEquation:^int(int x, int y) {
-        return x + y;
+        int sum = x + y;
+        return multiplier * sum;
+        //return x + y;
+    }];
+
+    // NSLog(@"% d", [executor computeWithValue: 2 andValue: 5]);
+    
+    // Get a pointer to the main operation queue and add a block to it
+    // Using addOperationWithBlock: on the main queue is pretty common. Many times, you will want
+    // the run loop to finish drawing views and clearing the autorelease pool before a block
+    // is executed.
+    [[ NSOperationQueue mainQueue] addOperationWithBlock:^void(void)
+    {
+        NSLog(@"[BNRAppDel] computeWithValue return: %d", [executor computeWithValue:2 andValue:5]);
     }];
     
-    NSLog(@"[BNR] executor adder: %d", [executor computeWithValue:2 andValue:5]);
+    // We will see this below message before the above
+    NSLog(@"[BNRAppDel] about to exit method...");
     
     
     self.window.backgroundColor = [UIColor whiteColor];
@@ -57,5 +73,7 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
 
 @end

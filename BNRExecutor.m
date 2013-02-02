@@ -18,6 +18,7 @@
 
 - (int)computeWithValue:(int)value1 andValue:(int)value2
 {
+    NSLog(@"\t[Executor] computeWithValue based on equation");
     // If a block variable is executed but doesn't point at a block
     // it will crash - return 0 if there is no block
     if (!equation)
@@ -27,4 +28,10 @@
     return equation(value1, value2);
 
 }
+
+
+- (void) dealloc {
+    NSLog(@"\t[Executor] being destroyed.");
+}
+
 @end
