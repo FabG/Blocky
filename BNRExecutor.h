@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface BNRExecutor : NSObject
-{
-    int (^equation)(int,int);
-}
 
-- (void)setEquation:(int (^)(int, int))block;               // takes a block as argument
+// Exposting block as property
+@property (nonatomic, copy) int (^equation)(int, int);
+
 - (int) computeWithValue:(int)value1 andValue:(int)value2;
 
 @end

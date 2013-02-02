@@ -16,16 +16,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    // local block variable
-    int (^adder)(int,int) = ^int(int x, int y) {
-        return x+y;
-    };
-    
-    //int sum = adder(2, 5);
-    //NSLog(@"[BNR] adder: %d", sum);
-    
+    // Block is allocated and immediately passed to the BNRExecutor, which sets its equation
+    // instance variable to point at it
     BNRExecutor *executor = [[BNRExecutor alloc]init];
-    [executor setEquation:adder];
+    [executor setEquation:^int(int x, int y) {
+        return x + y;
+    }];
+    
     NSLog(@"[BNR] executor adder: %d", [executor computeWithValue:2 andValue:5]);
     
     

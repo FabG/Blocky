@@ -14,10 +14,7 @@
 
 @implementation BNRExecutor
 
-- (void)setEquation:(int (^)(int, int))block
-{
-    equation = block;
-}
+@synthesize equation;
 
 - (int)computeWithValue:(int)value1 andValue:(int)value2
 {
